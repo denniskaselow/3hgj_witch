@@ -4,7 +4,7 @@ import 'package:3hgj_witch/client.dart';
                              MovementHandlingSystem, InputEventListeningSystem,
                              GravitySystem, ActionHandlingSysteme,
                              HealthBarRenderingSystem, CollisionDetectionSystem,
-                             CollisionHandlingSystem
+                             CollisionHandlingSystem, ActionCooldownSystem
                             ])
 import 'dart:mirrors';
 
