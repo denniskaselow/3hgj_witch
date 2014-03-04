@@ -2,7 +2,9 @@ import 'package:3hgj_witch/client.dart';
 
 @MirrorsUsed(targets: const [EntityRenderingSysteme, MovementSystem,
                              MovementHandlingSystem, InputEventListeningSystem,
-                             GravitySystem, ActionHandlingSysteme
+                             GravitySystem, ActionHandlingSysteme,
+                             HealthBarRenderingSystem, CollisionDetectionSystem,
+                             CollisionHandlingSystem
                             ])
 import 'dart:mirrors';
 
@@ -16,13 +18,21 @@ class Game extends GameBase {
 
   void createEntities() {
     addEntity([new Transform(100, 500, 1),
+               new BodyDef(new Rectangle(-10, -40, 20, 80)),
                new Velocity(),
                new MovementButton(KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D),
-               new ActionButton(KeyCode.J)]);
+               new ActionButton(KeyCode.J),
+               new Health(10),
+               new HealthBar(200, 100),
+               new Player(1)]);
     addEntity([new Transform(700, 500, -1),
+               new BodyDef(new Rectangle(-10, -40, 20, 80)),
                new Velocity(),
                new MovementButton(KeyCode.UP, KeyCode.LEFT, KeyCode.DOWN, KeyCode.RIGHT),
-               new ActionButton(KeyCode.NUM_ONE)]);
+               new ActionButton(KeyCode.NUM_ONE),
+               new Health(10),
+               new HealthBar(600, 100),
+               new Player(2)]);
   }
 
   List<EntitySystem> getSystems() {
@@ -33,8 +43,11 @@ class Game extends GameBase {
             new MovementSystem(),
             new ActionHandlingSysteme(),
             new ActionCooldownSystem(),
+            new CollisionDetectionSystem(),
+            new CollisionHandlingSystem(),
             new CanvasCleaningSystem(canvas),
             new EntityRenderingSysteme(canvas),
+            new HealthBarRenderingSystem(ctx),
             new FpsRenderingSystem(ctx)
     ];
   }

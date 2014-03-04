@@ -26,5 +26,28 @@ class Jumping extends Component {}
 
 class ActionCooldown extends Component {
   double duration = 1000.0;
-  ActionCooldown();
+}
+
+class Health extends Component {
+  int health;
+  Health(this.health);
+}
+
+class HealthBar extends Component {
+  Vector2 pos;
+  HealthBar(num x, num y) : pos= new Vector2(x.toDouble(), y.toDouble());
+}
+
+class Damage extends Component {
+  int damage = 1;
+}
+
+class BodyDef extends Component {
+  Rectangle body;
+  BodyDef(this.body);
+}
+
+class Player extends Component {
+  int player;
+  Player(this.player);
 }
