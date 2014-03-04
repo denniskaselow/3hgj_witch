@@ -4,7 +4,8 @@ class EntityRenderingSysteme extends EntityProcessingSystem {
   ComponentMapper<Transform> tm;
   ComponentMapper<BodyDef> bm;
   CanvasRenderingContext2D ctx;
-  EntityRenderingSysteme(CanvasElement canvas) :
+  SpriteSheet sheet;
+  EntityRenderingSysteme(CanvasElement canvas, this.sheet) :
     ctx = canvas.context2D,
     super(Aspect.getAspectForAllOf([Transform, BodyDef]));
 
@@ -13,8 +14,8 @@ class EntityRenderingSysteme extends EntityProcessingSystem {
   void processEntity(Entity entity) {
     var t = tm.get(entity);
     var b = bm.get(entity);
-    ctx..fillStyle = 'black'
-       ..fillRect(t.pos.x + b.body.left, t.pos.y + b.body.top, b.body.width, b.body.height);
+    var sprite = sheet.sprites[b.spriteName];
+    ctx.drawImageToRect(sheet.image, new Rectangle(t.pos.x + sprite.offset.x, t.pos.y + sprite.offset.y, sprite.dst.width, sprite.dst.height), sourceRect: sheet.sprites[b.spriteName].src);
 
   }
 }
@@ -37,5 +38,16 @@ class HealthBarRenderingSystem extends EntityProcessingSystem {
        ..fillRect(hb.pos.x - 150, hb.pos.y - 10, 300, 20)
        ..fillStyle = 'green'
        ..fillRect(hb.pos.x - 150, hb.pos.y - 10, h.health * 30, 20);
+  }
+}
+
+class BackgroundRenderingSystem extends VoidEntitySystem {
+  CanvasRenderingContext2D ctx;
+  SpriteSheet sheet;
+  BackgroundRenderingSystem(this.ctx, this.sheet);
+
+  @override
+  void processSystem() {
+    ctx.drawImageToRect(sheet.image, new Rectangle(0, 0, 800, 600), sourceRect: sheet.sprites['bg.png'].src);
   }
 }

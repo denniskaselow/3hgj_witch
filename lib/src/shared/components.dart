@@ -44,7 +44,8 @@ class Damage extends Component {
 
 class BodyDef extends Component {
   Rectangle body;
-  BodyDef(this.body);
+  String spriteName;
+  BodyDef(this.body, this.spriteName);
 }
 
 class Player extends Component {

@@ -13,7 +13,7 @@ class MovementHandlingSystem extends EntityProcessingSystem {
     var v = vm.get(entity);
     var m = mm.get(entity);
     if (keyState[m.jump] == true) {
-      v.velocity.y = -5.0;
+      v.velocity.y = -7.5;
       entity.addComponent(new Jumping());
       entity.changedInWorld();
     }
@@ -40,9 +40,9 @@ class ActionHandlingSysteme extends EntityProcessingSystem {
     var a = am.get(entity);
     var p = pm.get(entity);
     if (keyState[a.shoot] == true) {
-      world.createAndAddEntity([new Transform(t.pos.x, t.pos.y, t.orientation),
-                                new Velocity.of(t.orientation * 2.0, 0.0),
-                                new BodyDef(new Rectangle(-10, -10, 20, 20)),
+      world.createAndAddEntity([new Transform(t.pos.x + t.orientation * 20.0, t.pos.y, t.orientation),
+                                new Velocity.of(t.orientation * 5.0, 0.0),
+                                new BodyDef(new Rectangle(-10, -10, 20, 20), 'fireball.png'),
                                 new Health(1),
                                 new Player(p.player),
                                 new Damage()]);
@@ -77,8 +77,8 @@ class MovementSystem extends EntityProcessingSystem {
     var t = tm.get(entity);
     var v = vm.get(entity);
     t.pos += v.velocity;
-    if (t.pos.y > 500.0) {
-      t.pos.y = 500.0;
+    if (t.pos.y > 450.0) {
+      t.pos.y = 450.0;
       entity.removeComponent(Jumping);
       entity.changedInWorld();
     }

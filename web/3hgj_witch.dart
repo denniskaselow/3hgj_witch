@@ -14,19 +14,19 @@ void main() {
 
 class Game extends GameBase {
 
-  Game() : super.noAssets('3hgj_witch', 'canvas', 800, 600);
+  Game() : super('3hgj_witch', 'canvas', 800, 600, bodyDefsName: null);
 
   void createEntities() {
-    addEntity([new Transform(100, 500, 1),
-               new BodyDef(new Rectangle(-10, -40, 20, 80)),
+    addEntity([new Transform(100, 450, 1),
+               new BodyDef(new Rectangle(-20, -100, 40, 200), 'witch.png'),
                new Velocity(),
                new MovementButton(KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D),
                new ActionButton(KeyCode.J),
                new Health(10),
                new HealthBar(200, 100),
                new Player(1)]);
-    addEntity([new Transform(700, 500, -1),
-               new BodyDef(new Rectangle(-10, -40, 20, 80)),
+    addEntity([new Transform(700, 450, -1),
+               new BodyDef(new Rectangle(-50, -100, 100, 200), 'fairy.png'),
                new Velocity(),
                new MovementButton(KeyCode.UP, KeyCode.LEFT, KeyCode.DOWN, KeyCode.RIGHT),
                new ActionButton(KeyCode.NUM_ONE),
@@ -46,9 +46,9 @@ class Game extends GameBase {
             new CollisionDetectionSystem(),
             new CollisionHandlingSystem(),
             new CanvasCleaningSystem(canvas),
-            new EntityRenderingSysteme(canvas),
+            new BackgroundRenderingSystem(ctx, spriteSheet),
+            new EntityRenderingSysteme(canvas, spriteSheet),
             new HealthBarRenderingSystem(ctx),
-            new FpsRenderingSystem(ctx)
     ];
   }
 
