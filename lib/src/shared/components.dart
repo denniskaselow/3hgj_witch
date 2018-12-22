@@ -1,4 +1,6 @@
-part of shared;
+import 'package:dartemis/dartemis.dart';
+import 'package:vector_math/vector_math.dart';
+import 'dart:math';
 
 class Transform extends Component {
   Vector2 pos;
@@ -25,7 +27,7 @@ class ActionButton extends Component {
 class Jumping extends Component {}
 
 class ActionCooldown extends Component {
-  double duration = 1000.0;
+  double duration = 1.0;
 }
 
 class Health extends Component {
@@ -35,7 +37,7 @@ class Health extends Component {
 
 class HealthBar extends Component {
   Vector2 pos;
-  HealthBar(num x, num y) : pos= new Vector2(x.toDouble(), y.toDouble());
+  HealthBar(num x, num y) : pos = Vector2(x.toDouble(), y.toDouble());
 }
 
 class Damage extends Component {
